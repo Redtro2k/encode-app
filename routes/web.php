@@ -35,6 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/encode', EncodeController::class, ['only' => ['index', 'store']]);
+Route::resource('/encode', EncodeController::class, ['only' => ['index', 'store', 'create']]);
 
 require __DIR__.'/auth.php';
