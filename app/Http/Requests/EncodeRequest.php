@@ -33,9 +33,4 @@ class EncodeRequest extends FormRequest
             'memo' => 'string|nullable'
         ];
     }
-    public function prepareValidation(){
-        $this->merge([
-            'client_name' => $this->filled('client_name') ? $this->input('client_name') : 'N/A',
-        ]);
-    }
 }

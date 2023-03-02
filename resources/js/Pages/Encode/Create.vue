@@ -20,7 +20,7 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('encode.store'), {
-        onFinish: () => form.reset('client_name', 'address', 'telephone', 'homepage', 'open_hours', 'facebook_page_url', 'memo')
+        onSuccess: () => form.reset('client_name', 'address', 'telephone', 'homepage', 'open_hours', 'facebook_fanpage_url', 'memo')
     })
 };
 </script>
@@ -38,7 +38,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.client_name"
-                    required
+
                     autofocus
                     autocomplete="client_name"
                 />
@@ -53,7 +53,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.address"
-                    required
+
                     autofocus
                     autocomplete="address"
                 />
@@ -68,7 +68,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.area"
-                    required
+
                     autofocus
                     autocomplete="area"
                 />
@@ -83,7 +83,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.telephone"
-                    required
+
                     autofocus
                     autocomplete="area"
                 />
@@ -98,7 +98,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.homepage"
-                    required
+
                     autofocus
                     autocomplete="homepage"
                 />
@@ -113,7 +113,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.category"
-                    required
+
                     autofocus
                     autocomplete="category"
                 />
@@ -128,7 +128,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.open_hours"
-                    required
+
                     autofocus
                     autocomplete="open_hours"
                 />
@@ -143,7 +143,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.facebook_fanpage_url"
-                    required
+
                     autofocus
                     autocomplete="facebook_page_url"
                 />
@@ -158,7 +158,7 @@ const submit = () => {
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.memo"
-                    required
+
                     autofocus
                     autocomplete="memo"
                 />
