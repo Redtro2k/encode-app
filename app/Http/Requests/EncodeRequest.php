@@ -33,4 +33,13 @@ class EncodeRequest extends FormRequest
             'memo' => 'string|nullable'
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        foreach ($this->all() as $key => $value) {
+            if (is_null($value) && $key !== 'memo') {
+                $this->merge([$key => 'N/A']);
+            }
+        }
+    }
 }
