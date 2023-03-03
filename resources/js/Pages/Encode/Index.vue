@@ -58,7 +58,7 @@ const threeDotMessage = (str, num) => {
                                 </tr>
                             </thead>
                             <tbody  class="divide-y divide-gray-200 bg-white">
-                                <tr v-if="$page.props.items.data == null" v-for="(item, index) in $page.props.items.data" :key="item.id">
+                                <tr v-if="$page.props.items.data.length !== 0" v-for="(item, index) in $page.props.items.data" :key="item.id">
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                                         {{ index + 1 }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.client_name }}
@@ -67,7 +67,7 @@ const threeDotMessage = (str, num) => {
                                         threeDotMessage(item.address, 30) }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.area }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.telephone }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.homepage }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ threeDotMessage(item.homepage, 20) }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.category }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.open_hours }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
@@ -76,19 +76,20 @@ const threeDotMessage = (str, num) => {
                                 <td
                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <Link :href="route('encode.destroy', item.id)" method="DELETE" as="button"
-                                        class="text-indigo-600 hover:text-indigo-900">Remove<span class="sr-only">, {{
-                                        item.id }}</span></Link>
+                                        class="text-indigo-600 hover:text-indigo-900">Remove<span class="sr-only">, {{ item.id }}</span></Link>
                                 </td>
                                 </tr>
                                 <tr v-else>
-                                    <td colspan="6" class="flex flex-col">Empty!</td>
+                                    <td colspan="10">
+                                        <p class="flex justify-center text-center py-2 text-lg font-extrabold text-gray-500">Empty</p>
+                                    </td>
                                 </tr>
                         </tbody>
                     </table>
                 </div>
                 <paginate v-if="$page.props.items.data.length !== 0" class="max-w-6xl mx-auto mt-8 px-4 sm:px-6 lg:px-8"
-          :links="$page.props.items.links" :from="$page.props.items.from" :to="$page.props.items.to" :result="$page.props.items.total"
-          :responsiveNext="$page.props.items.next_page_url" :responsivePrevious="$page.props.items.first_page_url" />
+                :links="$page.props.items.links" :from="$page.props.items.from" :to="$page.props.items.to" :result="$page.props.items.total"
+                :responsiveNext="$page.props.items.next_page_url" :responsivePrevious="$page.props.items.first_page_url" />
             </div>
         </div>
     </div>

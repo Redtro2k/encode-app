@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class EncodeExport implements FromCollection, WithMapping, WithHeadings, WithStyles
 {
     use Exportable;
-
+    private $count = 1;
     public function collection()
     {
         // return Encode::orderBy('client_name', 'asc')->get();'
@@ -26,7 +26,7 @@ class EncodeExport implements FromCollection, WithMapping, WithHeadings, WithSty
     public function map($row): array
     {
         return [
-            $row->id,
+            $this->count++,
             $row->client_name,
             $row->address,
             $row->area,
