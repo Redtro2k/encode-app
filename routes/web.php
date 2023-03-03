@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('/encode', EncodeController::class, ['only' => ['index', 'store', 'create', 'destroy']]);
 
-Route::get('/encode/export', [EncodeController::class, 'export']);
+Route::get('/encode/export', [EncodeController::class, 'export'])->name('export');
+
+Route::controller(EncodeController::class)->group(function() {
+    Route::get('/encode/export', 'export')->name('export');
+    Route::get('/encode/clear', 'clearAll')->name('erase');
+});
 
 require __DIR__.'/auth.php';

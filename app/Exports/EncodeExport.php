@@ -19,6 +19,7 @@ class EncodeExport implements FromCollection, WithMapping, WithHeadings, WithSty
 
     public function collection()
     {
+        // return Encode::orderBy('client_name', 'asc')->get();'
         return Encode::all();
     }
 
@@ -40,7 +41,7 @@ class EncodeExport implements FromCollection, WithMapping, WithHeadings, WithSty
     public function headings(): array
     {
         return [
-            'ID',
+            'No.',
             'Client Name',
             'Address',
             'Area',

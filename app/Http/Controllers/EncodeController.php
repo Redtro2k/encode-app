@@ -21,7 +21,7 @@ class EncodeController extends Controller
     }
     public function index(){
         return Inertia::render('Encode/Index', [
-            'items' => $this->encode->all()
+            'items' => $this->encode->orderBy('created_at', 'DESC')->paginate(12)
         ]);
     }
 
@@ -34,13 +34,18 @@ class EncodeController extends Controller
     }
     public function store(EncodeRequest $request){
             if($request->validated()){
-                return $this->createNewRecord($request, $this->encode);
+                return $this->createNewRecord($request->validated(), $this->encode);
             }
             return redirect()->back()->with('success', 'successfully created!');
     }
 
     public function destroy($id){
         $this->encode->find($id)->delete();
+        return redirect()->back();
+    }
+
+    public function clearAll(){
+        $this->encode->all()->each->delete();
         return redirect()->back();
     }
 }
