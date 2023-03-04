@@ -34,9 +34,9 @@ class EncodeController extends Controller
     }
     public function store(EncodeRequest $request){
             if($request->validated()){
-                return $this->createNewRecord($request->validated(), $this->encode);
+                $this->createNewRecord($request->validated(), $this->encode);
+                return redirect()->back()->with('message', 'successfully created!');
             }
-            return redirect()->back()->with('success', 'successfully created!');
     }
 
     public function destroy($id){
