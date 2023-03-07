@@ -9,19 +9,173 @@ import { computed } from 'vue'
 
 const encode = computed(() => usePage().props.encode);
 
-const form = useForm({
-    client_name: encode.client_name,
-    address: '',
-    area: '',
-    telephone: '',
-    homepage: '',
-    category: '',
-    open_hours: '',
-    facebook_fanpage_url: '',
-    memo: ''
-});
+const ifExist = (text) => {
+    return text == 'N/A' ? '' : text
+}
 
+const form = useForm({
+    client_name: ifExist(encode.value.client_name),
+    address: ifExist(encode.value.address),
+    area: ifExist(encode.value.area),
+    telephone: ifExist(encode.value.telephone),
+    homepage: ifExist(encode.value.homepage),
+    category: ifExist(encode.value.category),
+    open_hours: ifExist(encode.value.open_hours),
+    facebook_fanpage_url: ifExist(encode.value.facebook_fanpage_url),
+    memo: ifExist(encode.value.memo)
+});
+const submit = () => {
+    form.put(route('encode.update', encode.value.id), {
+        onSuccess: () => form.reset('client_name', 'address', 'telephone', 'homepage', 'open_hours', 'facebook_fanpage_url', 'memo'),
+        onFinish: () => alert('Successfully Updated')
+    })
+};
 </script>
 <template>
+    <GuestLayout>
+        <Head title="Edit Record" />
 
+        <form @submit.prevent="submit">
+            <div>
+                <InputLabel for="client_name" value="Client Name" />
+
+                <TextInput
+                    id="client_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.client_name"
+
+                    autofocus
+                    autocomplete="client_name"
+                />
+
+                <InputError class="mt-2" :message="form.errors.client_name" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="address" value="Address" />
+
+                <TextInput
+                    id="address"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.address"
+
+                    autofocus
+                    autocomplete="address"
+                />
+
+                <InputError class="mt-2" :message="form.errors.address" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="area" value="Area" />
+
+                <TextInput
+                    id="area"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.area"
+
+                    autofocus
+                    autocomplete="area"
+                />
+
+                <InputError class="mt-2" :message="form.errors.address" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="telephone" value="Telephone" />
+
+                <TextInput
+                    id="telephone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.telephone"
+
+                    autofocus
+                    autocomplete="area"
+                />
+
+                <InputError class="mt-2" :message="form.errors.telephone" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="homepage" value="Homepage" />
+
+                <TextInput
+                    id="homepage"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.homepage"
+
+                    autofocus
+                    autocomplete="homepage"
+                />
+
+                <InputError class="mt-2" :message="form.errors.telephone" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="category" value="Category" />
+
+                <TextInput
+                    id="category"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.category"
+
+                    autofocus
+                    autocomplete="category"
+                />
+
+                <InputError class="mt-2" :message="form.errors.category" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="open_hours" value="Open Hours" />
+
+                <TextInput
+                    id="open_hours"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.open_hours"
+
+                    autofocus
+                    autocomplete="open_hours"
+                />
+
+                <InputError class="mt-2" :message="form.errors.open_hours" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="facebook_fanpage_url" value="Facebook Url" />
+
+                <TextInput
+                    id="facebook_fanpage_url"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.facebook_fanpage_url"
+
+                    autofocus
+                    autocomplete="facebook_page_url"
+                />
+
+                <InputError class="mt-2" :message="form.errors.facebook_page_url" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="memo" value="Memo" />
+
+                <TextInput
+                    id="category"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.memo"
+
+                    autofocus
+                    autocomplete="memo"
+                />
+
+                <InputError class="mt-2" :message="form.errors.memo" />
+            </div>
+            <div class="flex items-center justify-end mt-4">
+                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Update
+                </PrimaryButton>
+            </div>
+        </form>
+    </GuestLayout>
 </template>

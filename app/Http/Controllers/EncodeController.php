@@ -46,6 +46,13 @@ class EncodeController extends Controller
        ]);
     }
 
+    public function update(EncodeRequest $request, $id){
+        if($request->validated()){
+            $this->updateExistingRecord($id, $request->validated(), $this->encode);
+            return redirect()->route('encode.index')->with('message', 'Successfully Update Records');
+        }
+    }
+
     public function destroy($id){
         $this->encode->find($id)->delete();
         return redirect()->back();

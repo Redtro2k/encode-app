@@ -22,7 +22,6 @@ const form = useForm({
 const submit = () => {
     form.post(route('encode.store'), {
         onSuccess: () => form.reset('client_name', 'address', 'telephone', 'homepage', 'open_hours', 'facebook_fanpage_url', 'memo'),
-        // onFinish: () => alert('Successfully Created!')
     })
 };
 </script>
@@ -32,9 +31,6 @@ const submit = () => {
         <Head title="Add Records" />
 
         <form @submit.prevent="submit">
-            <!-- <span class="font-medium flex justify-center bg-green-400 p-2 text-white border-solid border-green-600">
-                        {{ $page.props.flash.message }}
-                    </span> -->
             <div>
                 <InputLabel for="client_name" value="Client Name" />
 

@@ -21,7 +21,7 @@ const threeDotMessage = (str, num) => {
             <div class="flex space-x-2">
                 <Link class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('encode.create')">Create</Link>
                 <a class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('export')">Export as Excel</a>
-                <Link class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('erase')">Clear All</Link>
+                <Link class="rounded-md bg-red-500 p-2 text-white hover:bg-red-400" :href="route('erase')">Clear All</Link>
             </div>
         </div>
         <div class="mt-8 flex flex-col">
