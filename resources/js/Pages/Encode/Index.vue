@@ -66,17 +66,29 @@ const threeDotMessage = (str, num) => {
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
                                         threeDotMessage(item.address, 30) }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.area }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.telephone }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ threeDotMessage(item.homepage, 20) }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ item.telephone.split(' ').join('-') }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <a :href="item.homepage" :class="[item.homepage != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">{{ threeDotMessage(item.homepage, 20) }}</a>
+                                        </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.category }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.open_hours }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{
-                                        threeDotMessage(item.facebook_fanpage_url, 20) }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <a :href="item.facebook_fanpage_url" :class="[item.facebook_fanpage_url != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">
+                                            {{threeDotMessage(item.facebook_fanpage_url, 20) }}
+                                            </a>
+                                        </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.memo }}</td>
                                 <td
                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                    <Link :href="route('encode.destroy', item.id)" method="DELETE" as="button"
+                                    <div class="flex space-x-4">
+                                        <Link :href="route('encode.destroy', item.id)" method="DELETE" as="button"
                                         class="text-indigo-600 hover:text-indigo-900">Remove<span class="sr-only">, {{ item.id }}</span></Link>
+                                        <Link :href="route('encode.edit', item.id)" method="GET" as="button"
+                                        class="text-green-600 hover:text-green-900">Edit<span class="sr-only">, {{ item.id }}</span></Link>
+                                    </div>
+
                                 </td>
                                 </tr>
                                 <tr v-else>

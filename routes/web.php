@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/encode', EncodeController::class, ['only' => ['index', 'store', 'create', 'destroy']]);
+Route::resource('/encode', EncodeController::class, ['only' => ['index', 'store', 'create', 'destroy', 'edit', 'update']]);
 
 Route::get('/encode/export', [EncodeController::class, 'export'])->name('export');
 

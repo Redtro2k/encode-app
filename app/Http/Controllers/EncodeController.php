@@ -39,6 +39,13 @@ class EncodeController extends Controller
             }
     }
 
+    public function edit($id){
+        $attr = $this->encode->find($id);
+       return Inertia::render('Encode/Edit', [
+        'encode' => $attr
+       ]);
+    }
+
     public function destroy($id){
         $this->encode->find($id)->delete();
         return redirect()->back();
