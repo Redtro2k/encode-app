@@ -70,14 +70,16 @@ const threeDotMessage = (str, num) => {
                                         {{ item.telephone.split(' ').join('-') }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <a :href="item.homepage" :class="[item.homepage != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">{{ threeDotMessage(item.homepage, 20) }}</a>
+                                        <component :is="item.homepage != 'N/A' ? 'a' : 'p'" :href="item.homepage" :class="[item.homepage != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">
+                                            {{ threeDotMessage(item.homepage, 20) }}
+                                        </component>
                                         </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.category }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.open_hours }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <a :href="item.facebook_fanpage_url" :class="[item.facebook_fanpage_url != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">
+                                        <component :is="item.homepage != 'N/A' ? 'a' : 'p'" :href="item.facebook_fanpage_url" :class="[item.facebook_fanpage_url != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">
                                             {{threeDotMessage(item.facebook_fanpage_url, 20) }}
-                                            </a>
+                                        </component>
                                         </td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.memo }}</td>
                                 <td
