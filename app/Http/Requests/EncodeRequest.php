@@ -25,11 +25,11 @@ class EncodeRequest extends FormRequest
             'client_name' => 'string|nullable|unique:encodes',
             'address' => 'string|nullable',
             'area' => 'string|nullable',
-            'telephone' => 'string|nullable|unique:encodes',
+            'telephone' => 'string|nullable',
             'homepage' => 'string|nullable',
             'category' => 'string|nullable',
             'open_hours' => 'string|nullable',
-            'facebook_fanpage_url' => 'string|nullable|unique:encodes',
+            'facebook_fanpage_url' => 'string|nullable',
             'memo' => 'string|nullable'
         ];
     }
