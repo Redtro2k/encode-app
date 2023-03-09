@@ -22,14 +22,14 @@ class EncodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'client_name' => 'string|nullable',
+            'client_name' => 'string|nullable|unique:encodes',
             'address' => 'string|nullable',
             'area' => 'string|nullable',
-            'telephone' => 'string|nullable',
+            'telephone' => 'string|nullable|unique:encodes',
             'homepage' => 'string|nullable',
             'category' => 'string|nullable',
             'open_hours' => 'string|nullable',
-            'facebook_fanpage_url' => 'string|nullable',
+            'facebook_fanpage_url' => 'string|nullable|unique:encodes',
             'memo' => 'string|nullable'
         ];
     }
