@@ -24,6 +24,17 @@ const sortColumn = (column) => {
         sortOrder.value = sortOrder.value === '' ? '-' : ''
     }
 }
+//add color
+const splitColumn = (sentence) => {
+    if(sentence == '')
+        return sentence
+    else{
+        sentence.split(',')
+    }
+}
+props.items.data.forEach((e) => {
+    console.log(e.memo)
+})
 
 watch([search, sortOrder], ([value, order]) => {
       let query = ''

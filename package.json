@@ -18,6 +18,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
-        "@heroicons/vue": "^2.0.16"
+        "@heroicons/vue": "^2.0.16",
+        "laravel-echo": "^1.15.0",
+        "pusher-js": "^8.0.1"
     }
 }
