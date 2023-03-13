@@ -21,8 +21,8 @@ class EncodeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'client_name' => 'string|nullable|unique:encodes',
+        $rules = [
+            'client_name' => 'string|nullable',
             'address' => 'string|nullable',
             'area' => 'string|nullable',
             'telephone' => 'string|nullable',
@@ -32,6 +32,12 @@ class EncodeRequest extends FormRequest
             'facebook_fanpage_url' => 'string|nullable',
             'memo' => 'string|nullable'
         ];
+        if($this->method() == 'PUT' || $this->method() == 'PATCH'){
+            $rules['client_name'] .= '|string';
+        } else{
+            $rules['client_name'] .= '|string|unique:encodes';
+        }
+        return $rules;
     }
 
     protected function prepareForValidation()

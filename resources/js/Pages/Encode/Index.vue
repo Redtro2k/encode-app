@@ -114,7 +114,7 @@ watch([search, sortOrder], ([value, order]) => {
                                         {{ item.telephone.split(' ').join('-') }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        <component :is="item.homepage != 'N/A' ? 'a' : 'p'" :href="item.homepage" :class="[item.homepage != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-700', ]">
+                                        <component :is="item.homepage != 'N/A' ? 'a' : 'p'" :href="item.homepage" :class="[item.homepage != 'N/A' ? 'text-indigo-500 hover:text-indigo-400' : 'text-gray-500']">
                                             {{ threeDotMessage(item.homepage, 20) }}
                                         </component>
                                         </td>

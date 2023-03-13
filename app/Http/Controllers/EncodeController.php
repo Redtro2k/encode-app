@@ -46,7 +46,7 @@ class EncodeController extends Controller
     }
 
     public function edit($id){
-        $attr = $this->encode->find($id);
+        $attr = $this->encode->findOrFail($id);
        return Inertia::render('Encode/Edit', [
         'encode' => $attr
        ]);
