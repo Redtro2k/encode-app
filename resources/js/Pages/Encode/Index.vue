@@ -2,7 +2,7 @@
 import { Link, router } from '@inertiajs/vue3';
 import Paginate from '@/Components/Paginated.vue';
 import { watch, ref } from 'vue'
-import { ArchiveBoxXMarkIcon, ArrowUpIcon, ArrowDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
+import { ArchiveBoxXMarkIcon, ArrowUpIcon, ArrowDownIcon, MagnifyingGlassIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
 
 const threeDotMessage = (str, num) => {
@@ -19,6 +19,10 @@ let props = defineProps({
 let search = ref(props.filters.search)
 let sortOrder = ref('-')
 
+const checkIfError = (text) => {
+    return text.includes("closed") || text.includes("Closed") || text.includes("close") || text.includes("Not") || text.includes("not") || text.includes("Not") ? true : false
+}
+
 const sortColumn = (column) => {
     if(column === 'client_name'){
         sortOrder.value = sortOrder.value === '' ? '-' : ''
@@ -29,12 +33,9 @@ const splitColumn = (sentence) => {
     if(sentence == '')
         return sentence
     else{
-        sentence.split(',')
+        return sentence.split(',')
     }
 }
-props.items.data.forEach((e) => {
-    console.log(e.memo)
-})
 
 watch([search, sortOrder], ([value, order]) => {
       let query = ''
@@ -116,7 +117,7 @@ watch([search, sortOrder], ([value, order]) => {
                             <tbody  class="divide-y divide-gray-200 bg-white">
                                 <tr v-if="props.items.data.length !== 0" v-for="(item, index) in props.items.data" :key="item.id">
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                        {{ index + 1 }}</td>
+                                        {{ item.no }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.client_name }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{threeDotMessage(item.address, 30) }}</td>
@@ -136,7 +137,16 @@ watch([search, sortOrder], ([value, order]) => {
                                             {{threeDotMessage(item.facebook_fanpage_url, 20) }}
                                         </component>
                                         </td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ item.memo }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <span v-if="item.memo">
+                                            <ul v-for="i in splitColumn(item.memo)" class="grid grid-cols-1">
+                                                <li :class="[checkIfError(i) ? 'text-red-800 bg-red-100' : 'text-indigo-800 bg-indigo-100', 'inline-flex space-y-1 my-1 items-center px-2 py-0.5 rounded text-xs font-medium']">
+                                                    <component :is="checkIfError(i) ? XMarkIcon : ExclamationCircleIcon" :class="[checkIfError(i) ? 'text-red-400' : 'text-indigo-400', 'mr-1.5 h-4 w-4']"/>
+                                                    {{ i }}
+                                                </li>
+                                            </ul>
+                                        </span>
+                                    </td>
                                 <td
                                     class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                     <div class="flex space-x-4">

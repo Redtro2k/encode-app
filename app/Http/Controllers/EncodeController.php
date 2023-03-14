@@ -21,10 +21,27 @@ class EncodeController extends Controller
         $this->encode = $encode;
     }
     public function index(){
+        $numberNo = 0;
         $query = QueryBuilder::for(Encode::class)
             ->allowedFilters('client_name')
             ->defaultSort('-created_at')
-            ->paginate(11);
+            ->paginate(11)
+            ->through(function($e) use(&$numberNo) {
+                return [
+                    'id' => $e->id,
+            'no' => ++$numberNo,
+            'client_name' => $e->client_name,
+            'address' => $e->address,
+            'area' => $e->area,
+            'telephone' => $e->telephone,
+            'homepage' => $e->homepage,
+            'category' => $e->category,
+            'open_hours' => $e->open_hours,
+            'facebook_fanpage_url' => $e->facebook_fanpage_url,
+            'memo' => $e->memo
+                ];
+            }
+            );
         return Inertia::render('Encode/Index', [
             'items' => $query,
             'filters' => Request::only(['search'])
