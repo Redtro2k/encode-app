@@ -2,7 +2,7 @@
 import { Link, router } from '@inertiajs/vue3';
 import Paginate from '@/Components/Paginated.vue';
 import { watch, ref } from 'vue'
-import { ArchiveBoxXMarkIcon, ArrowUpIcon, ArrowDownIcon, MagnifyingGlassIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { ArchiveBoxXMarkIcon, ArrowUpIcon, ArrowDownIcon, MagnifyingGlassIcon, ExclamationCircleIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 
 
 const threeDotMessage = (str, num) => {
@@ -20,8 +20,35 @@ let search = ref(props.filters.search)
 let sortOrder = ref('-')
 
 const checkIfError = (text) => {
-    return text.includes("closed") || text.includes("Closed") || text.includes("close") || text.includes("Not") || text.includes("not") || text.includes("Not") ? true : false
+    const possibleError = [
+        'closed',
+        'Closed',
+        'close',
+        'Close',
+        'Not',
+        'not',
+        'Error',
+        'error',
+        'Permanently',
+        'Wrong',
+        'Broken'
+    ];
+    const possibleWarning = [
+        'warning',
+        'soon',
+        "Soon",
+        'coming',
+        'Coming'
+    ]
+    const includesMultipleValues = possibleError.some(value => text.includes(value))
+    const includesMultipleValuesWarning = possibleWarning.some(value => text.includes(value))
+    if (includesMultipleValues) {
+        return 'error'
+    } else {
+        return includesMultipleValuesWarning ? 'warning' : false;
+    }
 }
+
 
 const sortColumn = (column) => {
     if(column === 'client_name'){
@@ -140,8 +167,9 @@ watch([search, sortOrder], ([value, order]) => {
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <span v-if="item.memo">
                                             <ul v-for="i in splitColumn(item.memo)" class="grid grid-cols-1">
-                                                <li :class="[checkIfError(i) ? 'text-red-800 bg-red-100' : 'text-indigo-800 bg-indigo-100', 'inline-flex space-y-1 my-1 items-center px-2 py-0.5 rounded text-xs font-medium']">
-                                                    <component :is="checkIfError(i) ? XMarkIcon : ExclamationCircleIcon" :class="[checkIfError(i) ? 'text-red-400' : 'text-indigo-400', 'mr-1.5 h-4 w-4']"/>
+                                                <li :class="[checkIfError(i) === 'error' ? 'text-red-800 bg-red-100' : checkIfError(i) === 'warning' ? 'text-yellow-800 bg-yellow-100' :'text-indigo-800 bg-indigo-100', 'inline-flex space-y-1 my-1 items-center px-2 py-0.5 rounded text-xs font-medium']">
+                                                    <component :is="checkIfError(i) === 'error' ? XMarkIcon : checkIfError(i) === 'warning'? ExclamationTriangleIcon :  ExclamationCircleIcon"
+                                                    :class="[checkIfError(i) === 'error' ? 'text-red-400' : checkIfError(i) === 'warning' ? 'text-yellow-400' :'text-indigo-400', 'mr-1.5 h-4 w-4 font-semibold']"/>
                                                     {{ i }}
                                                 </li>
                                             </ul>
