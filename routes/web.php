@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, EncodeController};
+use App\Http\Controllers\{ProfileController, EncodeController, MapController, Invoke\FindController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,5 +43,8 @@ Route::controller(EncodeController::class)->group(function() {
     Route::get('/encode/export', 'export')->name('export');
     Route::get('/encode/clear', 'clearAll')->name('erase');
 });
+
+Route::resource('/map', MapController::class, ['only' => 'create', 'store']);
+Route::post('/find_map', FindController::class)->name('find.store');
 
 require __DIR__.'/auth.php';

@@ -88,6 +88,7 @@ watch([search, sortOrder], ([value, order]) => {
             </div>
             <div class="flex space-x-2">
                 <Link class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('encode.create')">Create</Link>
+                <Link class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('map.create')">Filter</Link>
                 <a class="rounded-md bg-indigo-500 p-2 text-white hover:bg-indigo-400" :href="route('export')">Export as Excel</a>
                 <Link class="rounded-md bg-red-500 p-2 text-white hover:bg-red-400" :href="route('erase')">Clear All</Link>
             </div>
