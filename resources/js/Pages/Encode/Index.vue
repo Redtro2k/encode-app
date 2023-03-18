@@ -38,7 +38,9 @@ const checkIfError = (text) => {
         'soon',
         "Soon",
         'coming',
-        'Coming'
+        'Coming',
+        'Opening',
+        'opening'
     ]
     const includesMultipleValues = possibleError.some(value => text.includes(value))
     const includesMultipleValuesWarning = possibleWarning.some(value => text.includes(value))

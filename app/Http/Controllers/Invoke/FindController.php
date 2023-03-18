@@ -17,7 +17,6 @@ class FindController extends Controller
         try {
             $response = $client->get($url);
             $content = $response->getBody()->getContents();
-
             $data = json_decode($content, true);
             $location = $data['results'][0]['geometry']['location'];
             return response()->json($location, 200);
